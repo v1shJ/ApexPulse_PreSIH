@@ -1,7 +1,6 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,6 +12,7 @@ const Login = () => {
 
     return (
         <View className="flex-1 justify-center items-center bg-white">
+            <Text className="text-2xl font-bold">Login</Text>
             <TextInput
                 className="w-64 h-10 border border-gray-300 rounded-md px-2 mt-4"
                 placeholder="Email"

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { styled } from "nativewind";
-import { router } from "expo-router";
-import * as Location from "expo-location";
 import Map from '../components/Map'
 import useLocation from '../hooks/useLocation'
 
