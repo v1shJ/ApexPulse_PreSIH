@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
-const App = ({ latitude, longitude }) => {
+const Map = ({ latitude, longitude }) => {
   return (
     <View style={styles.container}>
       <View style={styles.mapWrapper}>
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Map;
