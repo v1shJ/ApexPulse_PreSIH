@@ -27,7 +27,6 @@ const useLocation = () => {
 
     fetchLocation();
   }, []);
-
   return { coords, error, loading };
 };
 

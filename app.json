@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "pre-sih-or-social-media",
-    "slug": "pre-sih-or-social-media",
+    "name": "pre-sih-frontend",
+    "slug": "pre-sih-frontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -28,11 +28,6 @@
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION"
       ]
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router"

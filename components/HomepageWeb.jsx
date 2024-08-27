@@ -1,27 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, View, TouchableOpacity, ScrollView, Platform} from "react-native";
 import { styled } from "nativewind";
 import useLocation from '../hooks/useLocation'
 const StyledButton = styled(TouchableOpacity);      // Can add styles only to styled(TouchableOpacity)
 
-let Map;
-
 export default function App() {
   const {coords, error, loading} = useLocation();           // gets user location from a function (hook) -> in hooks/useLocation.js
   const [working, setWorking] = useState(false);            // working state, true or false
-  const [map, setMap] = useState(false);
-
-  const loadMap = () => {
-    if (Platform.OS != 'web') {
-      console.log("We are not on web")
-      Map = React.lazy(() => import('../components/Map.jsx'))
-      setMap(true);
-    }
-  }
-
-  useEffect(() => {
-    loadMap();
-  }, [])
 
   // Sample data, later from API
   const user = {
@@ -98,7 +83,7 @@ export default function App() {
           </StyledButton>
         </View>
       </View>
-      {map && <Map latitude={coords.latitude} longitude={coords.longitude} />}
+
     </ScrollView>
   );
 }
