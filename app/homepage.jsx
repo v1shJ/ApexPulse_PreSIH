@@ -13,7 +13,6 @@ export default function App() {
 
   const loadMap = () => {
     if (Platform.OS != 'web') {
-      console.log("We are not on web")
       Map = React.lazy(() => import('../components/Map.jsx'))
       setMap(true);
     }

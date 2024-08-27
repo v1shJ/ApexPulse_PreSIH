@@ -1,7 +1,6 @@
 import Homepage from './homepage'
 import Login from './login'
 import { useState } from "react";
-import '../shim.js'
 
 //Code to have it working on web
 
