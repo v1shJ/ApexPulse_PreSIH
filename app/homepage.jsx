@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Suspense, lazy } from "react";
+import haversineDistance from "../utils/haversine.js";
 import { Text, View, TouchableOpacity, ScrollView, Platform } from "react-native";
 import { styled } from "nativewind";
 import useLocation from '../hooks/useLocation.js';
@@ -11,25 +12,38 @@ export default function App() {
   const [working, setWorking] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
 
-  useEffect(() => {
-    if (Platform.OS !== 'web' && coords) {
-      setMapLoaded(true); // Set state to trigger rendering of the Map component
-    }
-  }, [coords]);
-
   const user = {
     name: "Ahaan Desai",
     company: "Goldman Sachs",
   };
 
   const company = {
-    name: "Goldman Sachs",
-    office: "Mumbai",
+    name: "Veermata Jijabai Technological Institute",
     location: {
-      latitude: 19.1537308,
-      longitude: 72.851749,
+      latitude: 19.02193369781635,
+      longitude: 72.8557752754173,
     },
   };
+
+  useEffect(() => {
+    if (coords) {
+      console.log(coords)
+      const distance = haversineDistance(coords.latitude, coords.longitude, 
+                                        company.location.latitude, company.location.longitude);
+      console.log(distance);
+      if (distance < 100) {
+        setWorking(true);
+      }
+      else {
+        setWorking(false);
+      }
+    }
+    if (Platform.OS !== 'web' && coords) {
+      setMapLoaded(true); // Set state to trigger rendering of the Map component
+    }
+  }, [coords]);
+
+  //Sample data, later from API
 
   if (error) {
     return <Text className="text-red-500">Error: {error}</Text>;
@@ -44,9 +58,9 @@ export default function App() {
     <ScrollView className="bg-black flex-1">
       <Text className="text-white mt-20 text-3xl font-bold px-2">Hello, {user.name}</Text>
       <Text className="text-yellow-400 text-lg font-bold px-2">Employed at {user.company}</Text>
-      <Text className="text-white text-lg mb-5 px-2">
+      {company.office && <Text className="text-white text-lg mb-5 px-2">
         Currently working at {company.office} office.
-      </Text>
+      </Text>}
       {working ? (
         <Text className="text-red-400 text-xl text-center">You are currently at work.</Text>
       ) : (
