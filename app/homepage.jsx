@@ -1,11 +1,20 @@
 import React, { useEffect, useState, Suspense, lazy } from "react";
 import haversineDistance from "../utils/haversine.js";
-import { Text, View, TouchableOpacity, ScrollView, Platform } from "react-native";
+import Statusbar from "../components/statusbar.jsx";
+
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Platform,
+} from "react-native";
+import Navbar from "../components/navbar.jsx";
 import { styled } from "nativewind";
-import useLocation from '../hooks/useLocation.js';
+import useLocation from "../hooks/useLocation.js";
 const StyledButton = styled(TouchableOpacity);
 
-const Map = lazy(() => import('../components/Map'));
+const Map = lazy(() => import("../components/Map"));
 
 export default function App() {
   const { coords, error, loading } = useLocation();
@@ -14,7 +23,7 @@ export default function App() {
 
   const user = {
     name: "Ahaan Desai",
-    company: "Goldman Sachs",
+    company: "Veermata Jijabai Technological Institute",
   };
 
   const company = {
@@ -27,18 +36,21 @@ export default function App() {
 
   useEffect(() => {
     if (coords) {
-      console.log(coords)
-      const distance = haversineDistance(coords.latitude, coords.longitude, 
-                                        company.location.latitude, company.location.longitude);
+      console.log(coords);
+      const distance = haversineDistance(
+        coords.latitude,
+        coords.longitude,
+        company.location.latitude,
+        company.location.longitude
+      );
       console.log(distance);
-      if (distance < 100) {
+      if (distance < 400) {
         setWorking(true);
-      }
-      else {
+      } else {
         setWorking(false);
       }
     }
-    if (Platform.OS !== 'web' && coords) {
+    if (Platform.OS !== "web" && coords) {
       setMapLoaded(true); // Set state to trigger rendering of the Map component
     }
   }, [coords]);
@@ -55,45 +67,67 @@ export default function App() {
 
   return (
     <>
-    <ScrollView className="bg-black flex-1">
-      <Text className="text-white mt-20 text-3xl font-bold px-2">Hello, {user.name}</Text>
-      <Text className="text-yellow-400 text-lg font-bold px-2">Employed at {user.company}</Text>
-      {company.office && <Text className="text-white text-lg mb-5 px-2">
-        Currently working at {company.office} office.
-      </Text>}
-      {working ? (
-        <Text className="text-red-400 text-xl text-center">You are currently at work.</Text>
-      ) : (
-        <Text className="text-green-400 text-xl text-center">You are currently not at work.</Text>
-      )}
-      <View>
-        <Text className="text-white mt-5 px-4 text-2xl font-bold">Set work location</Text>
-        <View className="flex-row space-x-4 mt-5 px-5">
-          <StyledButton className="bg-blue-500 items-center px-4 py-2 rounded-lg" style={{ width: 88 }}>
-            <Text className="text-white">Onsite</Text>
-          </StyledButton>
-          <StyledButton className="bg-blue-500 items-center px-4 py-2 rounded-lg" style={{ width: 88 }}>
-            <Text className="text-white">Remote</Text>
-          </StyledButton>
+    <Statusbar/>
+      <Navbar />
+      <ScrollView className="bg-black flex-1">
+        <View className="flex-1 gap-1">
+          <View className="bg-gray-600 p-2 rounded-lg">
+            <Text className="text-white mt-2 text-3xl font-bold px-2  text-center">
+              Hello, {user.name}
+            </Text>
+            <Text className="text-yellow-500 text-lg font-bold px-2  text-center">
+              Employed at {user.company}
+            </Text>
+            {company.office && (
+              <Text className="text-white text-lg mb-5 px-2">
+                Currently working at {company.office} office.
+              </Text>
+            )}
+            {working ? (
+              <Text className="text-blue-200 text-xl text-center">
+                You are currently at work.
+              </Text>
+            ) : (
+              <Text className="text-green-400 text-xl text-center">
+                You are currently not at work.
+              </Text>
+            )}
+          </View>
+          <View className="bg-gray-600 p-4 items-center rounded-lg">
+            <Text className="text-white text-2xl font-bold text-center my-2">
+              Set work location
+            </Text>
+            <View className="flex-row mt-5 px-5 justify-evenly gap-5">
+              <StyledButton className="bg-blue-500 items-center px-4 py-2 rounded-lg">
+                <Text className="text-white">Onsite</Text>
+              </StyledButton>
+              <StyledButton className="bg-blue-500 items-center px-4 py-2 rounded-lg">
+                <Text className="text-white">Remote</Text>
+              </StyledButton>
+            </View>
+          </View>
+          <View className="bg-gray-600 rounded-lg">
+            <Text className="text-white mt-5 px-4 text-2xl font-bold text-center">
+              Report problem
+            </Text>
+            <View className="flex-row gap-4 p-4 justify-center">
+              <StyledButton className="bg-green-500 px-4 py-2 rounded-lg items-center">
+                <Text className="text-white">Request Leave</Text>
+              </StyledButton>
+              <StyledButton className="bg-red-600 px-4 py-2 rounded-lg items-center">
+                <Text className="text-white">Report Emergency</Text>
+              </StyledButton>
+            </View>
+          </View>
         </View>
-      </View>
-      <View>
-        <Text className="text-white mt-5 px-4 text-2xl font-bold">Report problem</Text>
-        <View className="flex-row space-x-4 mt-5 px-4">
-          <StyledButton className="bg-green-500 px-4 py-2 rounded-lg items-center" style={{ width: 150 }}>
-            <Text className="text-white">Request Leave</Text>
-          </StyledButton>
-          <StyledButton className="bg-red-600 px-4 py-2 rounded-lg items-center" style={{ width: 150 }}>
-            <Text className="text-white">Report Emergency</Text>
-          </StyledButton>
-        </View>
-      </View>
-      {mapLoaded && coords && (
-        <Suspense fallback={<Text className="text-white">Loading map...</Text>}>
-          <Map latitude={coords.latitude} longitude={coords.longitude} />
-        </Suspense>
-      )}
-    </ScrollView>
-  </>
+        {mapLoaded && coords && (
+          <Suspense
+            fallback={<Text className="text-white">Loading map...</Text>}
+          >
+            <Map latitude={coords.latitude} longitude={coords.longitude} />
+          </Suspense>
+        )}
+      </ScrollView>
+    </>
   );
 }
