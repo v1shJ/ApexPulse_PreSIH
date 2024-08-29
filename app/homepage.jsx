@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Suspense, lazy } from "react";
 import haversineDistance from "../utils/haversine.js";
-import Statusbar from "../components/statusbar.jsx";
+import Statusbar from "../components/StatusBar.jsx";
 
 import {
   Text,
@@ -9,9 +9,10 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-import Navbar from "../components/navbar.jsx";
+import Navbar from "../components/Navbar.jsx";
 import { styled } from "nativewind";
 import useLocation from "../hooks/useLocation.js";
+import ErrorBoundary from "../components/MapErrorBoundary.jsx";
 const StyledButton = styled(TouchableOpacity);
 
 const Map = lazy(() => import("../components/Map"));
@@ -121,10 +122,10 @@ export default function App() {
           </View>
         </View>
         {mapLoaded && coords && (
-          <Suspense
-            fallback={<Text className="text-white">Loading map...</Text>}
-          >
-            <Map latitude={coords.latitude} longitude={coords.longitude} />
+          <Suspense fallback={<Text className="text-white">Loading map...</Text>}>
+            <ErrorBoundary>
+              <Map latitude={coords.latitude} longitude={coords.longitude} />
+            </ErrorBoundary>
           </Suspense>
         )}
       </ScrollView>
