@@ -8,8 +8,10 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
+
 import { styled } from "nativewind";
 import useLocation from "../hooks/useLocation.js";
+import ErrorBoundary from "../components/MapErrorBoundary.jsx";
 const StyledButton = styled(TouchableOpacity);
 
 const Map = lazy(() => import("../components/Map"));
@@ -58,13 +60,11 @@ export default function Homepage({ username }) {
     return <Text className="text-white">Loading...</Text>;
   }
 
-  console.log(username);
-
   return (
     <>
-      <ScrollView className="bg-black flex-1">
-        <View className="flex-1 gap-1">
-          <View className="bg-gray-900 p-2 rounded-lg">
+      <ScrollView className="bg-black">
+        <View className="gap-1">
+          <View className="bg-gray-900 p-2 items-center rounded-lg">
             <Text className="text-white mt-2 text-2xl font-bold px-2  text-center">
               Hello, {username}
             </Text>
@@ -90,7 +90,7 @@ export default function Homepage({ username }) {
             <Text className="text-white text-2xl font-bold text-center my-2">
               Set work location
             </Text>
-            <View className="flex-row mt-5 px-5 justify-evenly gap-5">
+            <View className="flex-row px-5 justify-evenly gap-5">
               <StyledButton className="bg-blue-500 items-center px-4 py-2 rounded-lg">
                 <Text className="text-white">Onsite</Text>
               </StyledButton>
@@ -117,7 +117,9 @@ export default function Homepage({ username }) {
           <Suspense
             fallback={<Text className="text-white">Loading map...</Text>}
           >
-            <Map latitude={coords.latitude} longitude={coords.longitude} />
+            <ErrorBoundary>
+              <Map latitude={coords.latitude} longitude={coords.longitude} />
+            </ErrorBoundary>
           </Suspense>
         )}
       </ScrollView>

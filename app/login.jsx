@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { styled } from "nativewind";
 const StyledButton = styled(TouchableOpacity);
 
-export default function SignInScreen() {
+export default function SignInScreen({setLoggedIn}) {
   return (
     <View className="flex-1 bg-gray-50 dark:bg-gray-900 justify-center px-6 py-8">
       <View className="w-full bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 sm:max-w-md">
@@ -48,7 +48,7 @@ export default function SignInScreen() {
                   </Text>
                 </StyledButton>
               </View>
-              <StyledButton className="bg-blue-600 items-center rounded-lg bg-primary-600 focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-white text-center">
+              <StyledButton onPress={() => setLoggedIn(true)} className="bg-blue-600 items-center rounded-lg bg-primary-600 focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-white text-center">
                 <Text>Sign in</Text>
               </StyledButton>
             </View>

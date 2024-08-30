@@ -5,8 +5,8 @@ import { styled } from "nativewind";
 
 const ProfilePage = ({username}) => {
   return (
-    <View className="flex-1 bg-gray-900 p-4">
-      <View className="bg-gray-800 overflow-hidden rounded-xl shadow border border-gray-700">
+    <View className="bg-gray-900 relative -top-36">
+      <View className="bg-gray-800 rounded-xl shadow border border-gray-700">
         <View className="px-4 py-5 sm:px-6">
           <Text className="text-lg leading-6 font-medium text-violet-400">
             Profile
@@ -27,7 +27,7 @@ const ProfilePage = ({username}) => {
                 Phone number
               </Text>
               <Text className="mt-1 text-sm text-white sm:mt-0 sm:w-2/3">
-                9653334753
+                9889323493
               </Text>
             </View>
             <View className="py-3 sm:py-5 sm:flex sm:flex-row sm:gap-4 sm:px-6">
@@ -35,7 +35,7 @@ const ProfilePage = ({username}) => {
                 Email address
               </Text>
               <Text className="mt-1 text-sm text-white sm:mt-0 sm:w-2/3">
-                johndoe@example.com
+                useremail@example.com
               </Text>
             </View>
             <View className="py-3 sm:py-5 sm:flex sm:flex-row sm:gap-4 sm:px-6">
