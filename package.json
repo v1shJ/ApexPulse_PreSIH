@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-community/checkbox": "^0.5.17",
     "@react-navigation/native": "^6.0.2",
     "@tradle/react-native-http": "^2.0.0",
     "assert": "^1.1.1",

@@ -5,8 +5,8 @@ const Statusbar = () => {
   return (
     <View>
       <StatusBar
-        // barStyle="dark-content"
-        backgroundColor="red"
+        barStyle="dark-content"
+        backgroundColor="black"
       />
     </View>
   );

@@ -7,15 +7,17 @@ module.exports = {
     "./screens/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        
+      },
+    },
   },
   plugins: [],
   // Add this line for web-specific styling
   variants: {
     extend: {
-      display: ['web'],
+      display: ["web"],
     },
   },
 };
-
-

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, Suspense, lazy } from "react";
 import haversineDistance from "../utils/haversine.js";
-import Statusbar from "../components/statusbar.jsx";
 
 import {
   Text,
@@ -9,22 +8,16 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-import Navbar from "../components/navbar.jsx";
 import { styled } from "nativewind";
 import useLocation from "../hooks/useLocation.js";
 const StyledButton = styled(TouchableOpacity);
 
 const Map = lazy(() => import("../components/Map"));
 
-export default function App() {
+export default function Homepage({ username }) {
   const { coords, error, loading } = useLocation();
   const [working, setWorking] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
-
-  const user = {
-    name: "Ahaan Desai",
-    company: "Veermata Jijabai Technological Institute",
-  };
 
   const company = {
     name: "Veermata Jijabai Technological Institute",
@@ -65,18 +58,18 @@ export default function App() {
     return <Text className="text-white">Loading...</Text>;
   }
 
+  console.log(username);
+
   return (
     <>
-    <Statusbar/>
-      <Navbar />
       <ScrollView className="bg-black flex-1">
         <View className="flex-1 gap-1">
-          <View className="bg-gray-600 p-2 rounded-lg">
-            <Text className="text-white mt-2 text-3xl font-bold px-2  text-center">
-              Hello, {user.name}
+          <View className="bg-gray-900 p-2 rounded-lg">
+            <Text className="text-white mt-2 text-2xl font-bold px-2  text-center">
+              Hello, {username}
             </Text>
             <Text className="text-yellow-500 text-lg font-bold px-2  text-center">
-              Employed at {user.company}
+              Employed at {company.name}
             </Text>
             {company.office && (
               <Text className="text-white text-lg mb-5 px-2">
@@ -93,7 +86,7 @@ export default function App() {
               </Text>
             )}
           </View>
-          <View className="bg-gray-600 p-4 items-center rounded-lg">
+          <View className="bg-gray-900 p-4 items-center rounded-lg">
             <Text className="text-white text-2xl font-bold text-center my-2">
               Set work location
             </Text>
@@ -106,7 +99,7 @@ export default function App() {
               </StyledButton>
             </View>
           </View>
-          <View className="bg-gray-600 rounded-lg">
+          <View className="bg-gray-900 rounded-lg">
             <Text className="text-white mt-5 px-4 text-2xl font-bold text-center">
               Report problem
             </Text>
