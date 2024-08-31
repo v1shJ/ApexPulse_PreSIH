@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 
-const useLocation = (interval = 60000) => { // default interval of 1 minute
+const useLocation = (interval = 10000) => { // default interval of 10 seconds
   const [coords, setCoords] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);

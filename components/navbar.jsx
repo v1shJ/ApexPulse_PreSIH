@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect} from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Animated,
   Easing,
+  Platform,
 } from "react-native";
 import { PassThrough } from "readable-stream";
 
@@ -21,16 +22,17 @@ const Navbar = ({ setShowProfile, showProfile, username,setIsMenuOpen,isMenuOpen
   };
 
   const profileImageSource = showProfile? imageSources.home: imageSources.profile;
+  const margin = Platform.OS === 'web' ? 'mt-2' : 'mt-6'
 
   return (
-    <View className="bg-gray-900 mt-6">
+    <View className="bg-gray-900">
       {/* Navbar */}
       <View className="flex-row justify-between items-center px-3 bg-gray-600">
         {!isMenuOpen? (
         <TouchableOpacity className="p-2" onPress={() => setIsMenuOpen(!isMenuOpen)}>
             <Image
               source={require("../assets/NavIcon.png")}
-              className="w-6 h-6 tint-white"
+              className="w-6 h-6 tint-white mt-6"
             />
         </TouchableOpacity>
         ):
@@ -38,21 +40,21 @@ const Navbar = ({ setShowProfile, showProfile, username,setIsMenuOpen,isMenuOpen
         <TouchableOpacity className="p-2" onPress={() => setIsMenuOpen(!isMenuOpen)}>
             <Image
               source={require("../assets/closenav.png")}
-              className="w-8 h-8 tint-white"
+              className="w-8 h-8 tint-white mt-6"
             />
         </TouchableOpacity>
         )}
         
 
         <View className="justify-center items-center flex-row">
-          <Text className="text-white">{username}</Text>
+          <Text className="text-white mt-6">{username}</Text>
           <TouchableOpacity
             className="p-2"
             onPress={() => setShowProfile(!showProfile)}
           >
             <Image
               source={profileImageSource}
-              className="w-8 h-8 rounded-full"
+              className="w-8 h-8 rounded-full mt-6"
             />
           </TouchableOpacity>
         </View>

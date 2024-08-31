@@ -4,11 +4,9 @@
     "slug": "pre-sih-frontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,17 +15,18 @@
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "We need your location to show you where you are on the map.",
         "NSLocationAlwaysUsageDescription": "We need your location to show you where you are on the map."
-      }
+      },
+      "bundleIdentifier": "geotracker-pre-sih"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION"
-      ]
+      ],
+      "package": "com.ahaan_desai27.presihfrontend"
     },
     "plugins": [
       "expo-router"

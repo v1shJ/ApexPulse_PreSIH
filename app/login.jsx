@@ -5,7 +5,7 @@ const StyledButton = styled(TouchableOpacity);
 
 export default function SignInScreen({setLoggedIn}) {
   return (
-    <View className="flex-1 bg-gray-50 dark:bg-gray-900 justify-center px-6 py-8">
+    <View className="flex-1 bg-gray-50 dark:bg-gray-900 justify-center px-6 py-8 items-center">
       <View className="w-full bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 sm:max-w-md">
         <View className="p-7 m-1 items-center space-y-4 md:space-y-6">
           <Text className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -43,13 +43,16 @@ export default function SignInScreen({setLoggedIn}) {
                   </Text>
                 </View>
                 <StyledButton className="items-end">
-                  <Text className="text-sm font-medium text-gray-400 dark:text-primary-500">
+                  <Text className="text-sm font-medium font-bold text-white dark:text-primary-500">
                     Forgot password?
                   </Text>
                 </StyledButton>
               </View>
               <StyledButton onPress={() => setLoggedIn(true)} className="bg-blue-600 items-center rounded-lg bg-primary-600 focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-white text-center">
                 <Text>Sign in</Text>
+              </StyledButton>
+              <StyledButton onPress={() => setLoggedIn(true)} className="bg-green-600 items-center rounded-lg bg-primary-600 focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-white text-center">
+                <Text>Get a Demo</Text>
               </StyledButton>
             </View>
           </View>

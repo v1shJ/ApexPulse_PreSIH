@@ -31,15 +31,13 @@ export default function Homepage({ username }) {
 
   useEffect(() => {
     if (coords) {
-      console.log(coords);
       const distance = haversineDistance(
         coords.latitude,
         coords.longitude,
         company.location.latitude,
         company.location.longitude
       );
-      console.log(distance);
-      if (distance < 400) {
+      if (distance <= 200) {
         setWorking(true);
       } else {
         setWorking(false);
